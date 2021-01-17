@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8B45C55725A5CAE0002DD332 /* Arme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45C55625A5CAE0002DD332 /* Arme.swift */; };
-		8B45C55B25A5CB21002DD332 /* BatlleGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45C55A25A5CB21002DD332 /* BatlleGame.swift */; };
-		8B45C55E25A5CB68002DD332 /* CreateCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45C55D25A5CB68002DD332 /* CreateCharacter.swift */; };
-		8B45C56125A5CBA9002DD332 /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45C56025A5CBA9002DD332 /* Attack.swift */; };
 		8B45C56425A5CF21002DD332 /* Hache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45C56325A5CF21002DD332 /* Hache.swift */; };
 		8B45C56725A5CFA3002DD332 /* Sabre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45C56625A5CFA3002DD332 /* Sabre.swift */; };
 		8B45C56A25A5CFE9002DD332 /* Couteaux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45C56925A5CFE9002DD332 /* Couteaux.swift */; };
@@ -37,9 +34,6 @@
 
 /* Begin PBXFileReference section */
 		8B45C55625A5CAE0002DD332 /* Arme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arme.swift; sourceTree = "<group>"; };
-		8B45C55A25A5CB21002DD332 /* BatlleGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatlleGame.swift; sourceTree = "<group>"; };
-		8B45C55D25A5CB68002DD332 /* CreateCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCharacter.swift; sourceTree = "<group>"; };
-		8B45C56025A5CBA9002DD332 /* Attack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
 		8B45C56325A5CF21002DD332 /* Hache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hache.swift; sourceTree = "<group>"; };
 		8B45C56625A5CFA3002DD332 /* Sabre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sabre.swift; sourceTree = "<group>"; };
 		8B45C56925A5CFE9002DD332 /* Couteaux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couteaux.swift; sourceTree = "<group>"; };
@@ -89,9 +83,6 @@
 		8B45C55925A5CAF2002DD332 /* Function */ = {
 			isa = PBXGroup;
 			children = (
-				8B45C55A25A5CB21002DD332 /* BatlleGame.swift */,
-				8B45C55D25A5CB68002DD332 /* CreateCharacter.swift */,
-				8B45C56025A5CBA9002DD332 /* Attack.swift */,
 				8B45C57C25A8A874002DD332 /* SelectCharacter.swift */,
 			);
 			path = Function;
@@ -200,7 +191,6 @@
 			files = (
 				8B45C55725A5CAE0002DD332 /* Arme.swift in Sources */,
 				8B45C58625AA31C0002DD332 /* Game.swift in Sources */,
-				8B45C55B25A5CB21002DD332 /* BatlleGame.swift in Sources */,
 				8B45C56A25A5CFE9002DD332 /* Couteaux.swift in Sources */,
 				8B45C56425A5CF21002DD332 /* Hache.swift in Sources */,
 				8B45C56725A5CFA3002DD332 /* Sabre.swift in Sources */,
@@ -209,8 +199,6 @@
 				8B738CCE25A3E1AA00DD5326 /* main.swift in Sources */,
 				8B45C57525A71E05002DD332 /* User.swift in Sources */,
 				8B738CD625A3E32E00DD5326 /* Character.swift in Sources */,
-				8B45C55E25A5CB68002DD332 /* CreateCharacter.swift in Sources */,
-				8B45C56125A5CBA9002DD332 /* Attack.swift in Sources */,
 				8B45C57D25A8A874002DD332 /* SelectCharacter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

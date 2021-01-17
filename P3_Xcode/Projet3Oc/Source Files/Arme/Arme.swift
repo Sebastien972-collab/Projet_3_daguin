@@ -8,10 +8,7 @@
 import Foundation
 class Arme {
     var name : String
-    var life = 3
-    
-    
-    
+
     init(name : String) {
         self.name = name
     }

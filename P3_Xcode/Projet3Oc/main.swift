@@ -48,7 +48,7 @@ if NewUser[0].isDead() == false && NewUser[1].isDead() == true  {
     }
    
     
-}while choice.lowercased() != "n"
+}while choice.lowercased() != "y"
 print("Good Bye !")
 
 

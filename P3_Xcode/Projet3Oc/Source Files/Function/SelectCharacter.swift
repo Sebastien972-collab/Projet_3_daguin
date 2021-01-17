@@ -6,7 +6,7 @@
 //
 
 import Foundation
-// Le joeur rentre l'index du persoonage qui va attaquer
+// The player returns the index of the persoonage which will attack
 func selectCharcter(User : User,statTeamUser : Int) -> Int {
 
     User.printTeamUser()
@@ -14,8 +14,8 @@ func selectCharcter(User : User,statTeamUser : Int) -> Int {
     var selectedCharacterUser = checkUserSelection()
     
 if selectedCharacterUser > statTeamUser - 1 {
-    print("Oups votre personnage n'existe pas ou n'existe plus ")
-    print("Selectionnez un autre personnage ")
+    print("Oops your character does not exist or no longer exists ")
+    print("Select another character ")
     selectedCharacterUser = checkUserSelection()
     }
     return selectedCharacterUser
@@ -29,7 +29,7 @@ func checkUserSelection() -> Int {
         selctedCharacter = readLine()!
         if selctedCharacter == "" || selctedCharacter.lowercased() >= "a" && selctedCharacter.lowercased() <= "z"{
             repeat{
-            print("Vous devez rentrer un chiffre")
+            print("You must enter a number")
             selctedCharacter = readLine()!
             }while selctedCharacter == "" || selctedCharacter.lowercased() >= "a" && selctedCharacter.lowercased() <= "z"
         }

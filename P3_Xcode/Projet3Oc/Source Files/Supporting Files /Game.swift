@@ -25,14 +25,14 @@ class Game {
         
                 var choice : String
         
-        print("Que voulez-vous faire ?")
-        print("Voulez-vous vous soignez ou combattre ? ")
-        print("Selectionez (S) pour soignez un membre de votre équipe ou (B) pour vous battre ")
+        print("What do you want to do?")
+        print("Do you want to heal or fight? ")
+        print("Select (T) to treat a member of your team or (F) to fight ")
         choice = readLine()!
         
-        if choice.lowercased() != "b" || choice.lowercased() != "s"{
-            while choice.lowercased() != "s" && choice.lowercased() != "b"{
-                print("Erreur nous ne reconaissons pas votre choix ")
+        if choice.lowercased() != "f" || choice.lowercased() != "t"{
+            while choice.lowercased() != "t" && choice.lowercased() != "f"{
+                print("Error we do not reconaissons your choice ")
                 choice = readLine()!
                 
             }
@@ -92,7 +92,7 @@ class Game {
     }
     //The function that allows the character to attack
    private func attack(Character1 : Character, Character2 : Character, secretArm : Bool){
-        print("- \(Character1.name) attaque \(Character2.name)")
+        print("- \(Character1.name) attack \(Character2.name)")
         if Character1.armType == 3 && secretArm == false{
             let NewHache = Hache(name: "userCharacterHache")
             let degat = NewHache.degat
@@ -112,7 +112,7 @@ class Game {
         }
        
         if Character2.life > 0 {
-            print("he staying \(Character2.name)  \(Character2.life) points of life ")
+            print("He staying \(Character2.name)  \(Character2.life) points of life ")
         }
         else{
             print("\(Character2.name) is die ")
