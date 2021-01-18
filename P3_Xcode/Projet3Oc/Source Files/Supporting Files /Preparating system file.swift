@@ -63,25 +63,16 @@ class PreparatingSystemGame {
             }
               
             if selectedArm.lowercased() == "a"{
-                print("Enter the name of your Axe")
-                let nameArm = readLine()!
-                let NewHacheArm = Hache(name: nameArm)
-                let armTypeUser = 3
-                let NewCharacterUser = Character(name: name!, arm: NewHacheArm, armType: armTypeUser)
+                let NewArm = Arme.axe
+                let NewCharacterUser = Character(name: name!, arm: NewArm)
                 team.append(NewCharacterUser)
             }else if selectedArm.lowercased() == "s" {
-                print("Enter the name of your Sword")
-                let nameArm = readLine()!
-                let NewSabreArm = Sabre(name: nameArm)
-                let armTypeUser = 2
-                let NewCharacterUser = Character(name: name!, arm: NewSabreArm , armType: armTypeUser)
+                let NewArm = Arme.sword
+                let NewCharacterUser = Character(name: name!, arm: NewArm)
                 team.append(NewCharacterUser)
             }else if selectedArm.lowercased() == "k" {
-                print("Enter the name of your Knife")
-                let nameArm = readLine()!
-                let NewCouteauArm = Sabre(name: nameArm)
-                let armTypeUser = 1
-                let NewCharacterUser = Character(name: name!, arm: NewCouteauArm, armType: armTypeUser )
+                let NewArm = Arme.knife
+                let NewCharacterUser = Character(name: name!, arm: NewArm)
                 team.append(NewCharacterUser)
             }
 

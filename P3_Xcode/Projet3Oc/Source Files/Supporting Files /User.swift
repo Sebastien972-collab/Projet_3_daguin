@@ -24,7 +24,7 @@ class User {
         var j = 0
         
         while i < teamUser.count {
-            print(" Equipe \(nameUserTeam) : Select \(j) for \(teamUser[i].name) (atk : \(teamUser[i].arm.name) life : \(teamUser[i].life))")
+            print(" Equipe \(nameUserTeam) : Select \(j) for \(teamUser[i].name) (atk : \(teamUser[i].degat) life : \(teamUser[i].life))")
             i = i + 1
             j = j + 1
         }

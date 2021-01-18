@@ -37,13 +37,13 @@ class Game {
                 
             }
            
-            if choice.lowercased() == "s" && choice == "s" {
+            if choice.lowercased() == "t" {
                     print("Select a player  ")
                     let characterSelected = selectCharcter(User: User1, statTeamUser: statTeamUser)
                     let characterGainLife = usePotion(Character:  User1.teamUser[characterSelected])
                     User1.teamUser[characterSelected] = characterGainLife
                 
-                }else if choice.lowercased() == "b"{
+                }else if choice.lowercased() == "f"{
                      batlleGame(Player1: User1, Player2: User2)
                   
                     
@@ -93,18 +93,8 @@ class Game {
     //The function that allows the character to attack
    private func attack(Character1 : Character, Character2 : Character, secretArm : Bool){
         print("- \(Character1.name) attack \(Character2.name)")
-        if Character1.armType == 3 && secretArm == false{
-            let NewHache = Hache(name: "userCharacterHache")
-            let degat = NewHache.degat
-            Character2.life = Character2.life - degat
-        }else if Character1.armType == 2  && secretArm == false {
-            let NewSabre = Sabre(name: "userCharacterSabre")
-            let degat = NewSabre.degat
-            Character2.life = Character2.life - degat
-        }else if Character1.armType == 1  && secretArm == false {
-            let NewCouteau = Couteau(name: "userCharacterKnife") 
-            let degat = NewCouteau.degat
-            Character2.life = Character2.life - degat
+        if  secretArm == false{
+            Character2.life = Character2.life - Character1.degat
         }else{
             Character2.life =  Character2.life / 2
             print("\(Character1.name) unlocked the secret arm and attack")

@@ -6,15 +6,17 @@
 //
 
 import Foundation
-class Arme {
-    var name : String
+enum Arme {
+    case axe, knife, sword, secret
+    
+    
 
-    init(name : String) {
-        self.name = name
-    }
     func secretArmActivate(degat : Int) -> Int {
         let degatSupp  = degat * 2
         return degatSupp
+    }
+    func degatArm(degat : Int) -> Int {
+        return degat
     }
 }
 

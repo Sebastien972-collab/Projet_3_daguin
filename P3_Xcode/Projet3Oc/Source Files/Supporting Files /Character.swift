@@ -12,12 +12,23 @@ class Character {
     var name : String
     var life = 10
     var arm : Arme
-    var armType : Int
+    var degat : Int
     
-    init(name : String, arm : Arme, armType : Int ) {
+   // var armType : Int
+    
+    init(name : String, arm : Arme) {
         self.name = name
         self.arm = arm
-        self.armType = armType
+        switch arm {
+        case .axe:
+            self.degat = 4
+        case .knife:
+            self.degat = 1
+        case .sword:
+            self.degat = 3
+        case.secret:
+            self.degat = life 
+        }
         
     }
 }
