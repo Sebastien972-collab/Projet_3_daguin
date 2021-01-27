@@ -7,7 +7,7 @@
 
 import Foundation
 class Potion {
-   var lilePointGain : Int
+    var lilePointGain : Int
     
     init(Characterlife : Int) {
         lilePointGain = (Characterlife / 2)

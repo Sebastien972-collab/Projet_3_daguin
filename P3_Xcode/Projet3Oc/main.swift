@@ -8,5 +8,4 @@
 import Foundation
 let NewGame = Game()
 NewGame.PrepareToPlay()
-NewGame.playGame()
 
