@@ -7,7 +7,7 @@
 
 import Foundation
 class Game {
-    var NewUser : [User] = []
+    var Users : [User] = []
     
     
     //MARK: - Prepare To Play
@@ -15,7 +15,6 @@ class Game {
         
         var userTeamName : String
         var teamUser : [Character]
-        let userScore = 0
         var i = 1
         repeat{
             print("Select the name of your team  Player \(i) ")
@@ -28,12 +27,12 @@ class Game {
             }
             teamUser = createCharacter()
             
-            let Player = User(nameUserTeam: userTeamName, teamUser: teamUser, userScore: userScore)
-            NewUser.append(Player)
+            let Player = User(nameUserTeam: userTeamName, teamUser: teamUser, userScore: 0)
+            Users.append(Player)
             
             i = i + 1
             print("Welcome to the Game ! ")
-        }while NewUser.count < 2
+        }while Users.count < 2
         
         playGame()
     }
@@ -47,15 +46,16 @@ class Game {
             
             
             print("Enter the name of your character \(i)")
-            var name = readLine()
-            while name! == "" {
+            var name = readLine()!
+            while name == "" {
                 print("You must enter a valid name ! Enter the name of your character ")
-                name = readLine()
+                print("Enter the name of your character \(i)")
+                name = readLine()!
             }
-            while checkNameCharacter(UserTeam: team, name: name!) != true{
+            while checkNameCharacter(UserTeam: team, name: name) != true{
                 print("That name is already taken!")
                 print("Enter the name of your character")
-                name = readLine()
+                name = readLine()!
             }
             //Here the joeur chooses the weapon he wants for his character
             print("Select your character ")
@@ -67,29 +67,35 @@ class Game {
             characterChoice  = readLine()!
             while characterChoice.lowercased() != "w" && characterChoice.lowercased() != "n" && characterChoice.lowercased() != "m" && characterChoice.lowercased() != "s" && characterChoice.lowercased() != "p"{
                 print("This character dosen'nt exist ! ")
+                print("Select your character \(i)")
+                print(" The Warrior 🗡 (w)")
+                print(" The ninja 🗡 (n)")
+                print(" The Magician 🔪 (m)")
+                print(" The Witch 🔪 (s)")
+                print(" The Paladin 🔪 (p)")
                 characterChoice  = readLine()!
             }
             switch characterChoice.lowercased() {
             case "w":
                 let weaponCharacter = equipWeapon()
                 
-                let NewCharacter = Warrior(nameWarrior: name!,weaponWarrior: weaponCharacter)
+                let NewCharacter = Warrior(nameWarrior: name,weaponWarrior: weaponCharacter)
                 team.append(NewCharacter)
             case "n":
                 let weaponCharacter = equipWeapon()
-                let NewCharacter = Ninja(nameNinja: name!, weaponNinja: weaponCharacter)
+                let NewCharacter = Ninja(nameNinja: name, weaponNinja: weaponCharacter)
                 team.append(NewCharacter)
             case "m":
                 let weaponCharacter = equipWeapon()
-                let NewCharacter = Magician(nameMagician: name!, weaponMagician: weaponCharacter)
+                let NewCharacter = Magician(nameMagician: name, weaponMagician: weaponCharacter)
                 team.append(NewCharacter)
             case "s":
                 let weaponCharacter = equipWeapon()
-                let NewCharacter = Witch(nameWitch: name!, weaponWitch: weaponCharacter)
+                let NewCharacter = Witch(nameWitch: name, weaponWitch: weaponCharacter)
                 team.append(NewCharacter)
             case "p":
                 let weaponCharacter = equipWeapon()
-                let NewCharacter = Paladin(namePaladin: name!, weaponPaladin: weaponCharacter)
+                let NewCharacter = Paladin(namePaladin: name, weaponPaladin: weaponCharacter)
                 team.append(NewCharacter)
             default:
                 break
@@ -110,7 +116,13 @@ class Game {
         
         var choiceWeapon = readLine()!
         while choiceWeapon.lowercased() != "a" && choiceWeapon.lowercased() != "s" && choiceWeapon.lowercased() != "d" && choiceWeapon.lowercased() != "l" {
+            
             print("Error this weapon dosen't exist ")
+            print("Select your weapon ")
+            print("Select (a) For axe")
+            print("Select (s) For Sword")
+            print("Select (d) For Dagger")
+            print("Select (l) For Legendary Sword")
             choiceWeapon = readLine()!
         }
         switch choiceWeapon.lowercased() {
@@ -149,28 +161,28 @@ class Game {
         return true
     }
     private func playGame()  {
-        while NewUser[0].isDead() == false && NewUser[1].isDead() == false {
+        while Users[0].isDead() == false && Users[1].isDead() == false {
             //Players take turns playing until they die
-            if NewUser[0].isDead() == false && NewUser[1].isDead() == false {
+            if Users[0].isDead() == false && Users[1].isDead() == false {
                 roundGame()
             }
-            if NewUser[0].isDead() == false && NewUser[1].isDead() == false  {
+            if Users[0].isDead() == false && Users[1].isDead() == false  {
                 roundGame()
             }
             
         }
         
         //Display stat winner
-        if NewUser[0].isDead() == false  {
-            print("The winner is \(NewUser[0].nameUserTeam) \n This stat is ")
-            NewUser[0].printTeamUser()
-            print(NewUser[0].userScore)
+        if Users[0].isDead() == false  {
+            print("The winner is \(Users[0].nameUserTeam) \n This stat is ")
+            Users[0].printTeamUser()
+            print(Users[0].userScore)
             
-        }else if NewUser[1].isDead() == false {
-            print("The winner is \(NewUser[1].nameUserTeam) \n This stat is ")
-            NewUser[1].printTeamUser()
+        }else if Users[1].isDead() == false {
+            print("The winner is \(Users[1].nameUserTeam) \n This stat is ")
+            Users[1].printTeamUser()
             print("Number of round")
-            print(NewUser[1].userScore)
+            print(Users[1].userScore)
         }
         var choice :String
         print("Do you want toreplay ? (y/n)")
@@ -191,40 +203,40 @@ class Game {
     // Start round game
     private func roundGame() {
         
-        let statTeamUser = NewUser[0].teamUser.count
-        if NewUser[0].userScore >= 1 {
+        let statTeamUser = Users[0].teamUser.count
+        if Users[0].userScore >= 1 {
             
             
             var choice : String
             
-            print("What do you want to do? \(NewUser[0].nameUserTeam)")
-            print("Do you want to heal or fight? \(NewUser[0].nameUserTeam)")
+            print("What do you want to do? \(Users[0].nameUserTeam)")
+            print("Do you want to heal or fight? \(Users[0].nameUserTeam)")
             print("Select (T) to treat a member of your team or (F) to fight ")
             choice = readLine()!
             
             if choice.lowercased() != "f" || choice.lowercased() != "t"{
                 while choice.lowercased() != "t" && choice.lowercased() != "f"{
-                    print("Error we do not reconaissons your choice ")
+                    print("Error we do not recognize your choice ")
                     choice = readLine()!
                     
                 }
                 
                 if choice.lowercased() == "t" {
                     print("Select a player  ")
-                    let characterSelected = selectCharcter(User: NewUser[0], statTeamUser: statTeamUser)
-                    let characterGainLife = usePotion(Character:  NewUser[0].teamUser[characterSelected])
-                    NewUser[0].teamUser[characterSelected] = characterGainLife
-                    NewUser.swapAt(0, 1)
+                    let characterSelected = selectCharcter(User: Users[0], statTeamUser: statTeamUser)
+                    let characterGainLife = usePotion(Character:  Users[0].teamUser[characterSelected])
+                    Users[0].teamUser[characterSelected] = characterGainLife
+                    Users.swapAt(0, 1)
                 }else if choice.lowercased() == "f"{
-                    batlleGame(Player1: NewUser[0], Player2: NewUser[1])
-                    NewUser.swapAt(0, 1)
+                    batlleGame(Player1: Users[0], Player2: Users[1])
+                    Users.swapAt(0, 1)
                     
                 }
             }
         }
         else{
-            batlleGame(Player1: NewUser[0], Player2: NewUser[1])
-            NewUser.swapAt(0, 1)
+            batlleGame(Player1: Users[0], Player2: Users[1])
+            Users.swapAt(0, 1)
             
         }
         
