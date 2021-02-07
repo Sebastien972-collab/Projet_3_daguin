@@ -8,6 +8,6 @@
 import Foundation
 class LegendarySword: Weapon {
     init() {
-        super.init(name: "LegendaruySword", damage: 5)
+        super.init(name: "LegendaruySword", damage: 6)
     }
 }

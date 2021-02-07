@@ -7,32 +7,36 @@
 
 import Foundation
 class Game {
-    var Users : [User] = []
+    var users : [User] = []
     
     
     //MARK: - Prepare To Play
-    func PrepareToPlay(){
+    ///Prepare the game by creating users and characters
+    func prepareToPlay(){
         
         var userTeamName : String
         var teamUser : [Character]
         var i = 1
+        
+        
+        print("The game will soon start...")
         repeat{
             print("Select the name of your team  Player \(i) ")
             
             //We create the players
             userTeamName = readLine()!
-            while userTeamName == "" {
+            while clearString(string: userTeamName) == false {
                 print("Error ! You must enter a valid name")
                 userTeamName = readLine()!
             }
             teamUser = createCharacter()
             
             let Player = User(nameUserTeam: userTeamName, teamUser: teamUser, userScore: 0)
-            Users.append(Player)
+            users.append(Player)
             
             i = i + 1
             print("Welcome to the Game ! ")
-        }while Users.count < 2
+        }while users.count < 2
         
         playGame()
     }
@@ -41,23 +45,23 @@ class Game {
         var team : [Character] = []
         var characterChoice : String
         var i = 1
-        // Function that premet to create a character
+        /// Function that premet to create a character
         while team.count < 3 {
             
             
             print("Enter the name of your character \(i)")
             var name = readLine()!
-            while name == "" {
+            while clearString(string: name) == false {
                 print("You must enter a valid name ! Enter the name of your character ")
                 print("Enter the name of your character \(i)")
                 name = readLine()!
             }
-            while checkNameCharacter(UserTeam: team, name: name) != true{
+            while checkNameCharacter(userTeam: team, name: name) != true{
                 print("That name is already taken!")
                 print("Enter the name of your character")
                 name = readLine()!
             }
-            //Here the joeur chooses the weapon he wants for his character
+            ///Here the joeur chooses the weapon he wants for his character
             print("Select your character ")
             print(" The Warrior 🗡 (w)")
             print(" The ninja 🗡 (n)")
@@ -105,8 +109,28 @@ class Game {
         }
         return team
     }
+    private func clearString(string : String) -> Bool{
+        var stringArray = Array(string)
+        var newIndex = stringArray.count - 1
+        
+        if stringArray.first != " " {
+            return true
+        }
+        
+        while newIndex > 0 {
+            if stringArray[newIndex] == " "  {
+                stringArray.remove(at: newIndex)
+                newIndex -= 1
+            }
+        }
+        if stringArray.first == " " {
+            return false
+        }
+        return true
+    }
     
     // MARK: - Equipe weapon
+    ///Allows you to equip the character with a weapon
     private func equipWeapon() -> Weapon{
         print("Select your weapon ")
         print("Select (a) For axe")
@@ -127,17 +151,17 @@ class Game {
         }
         switch choiceWeapon.lowercased() {
         case "a":
-            let NewWeapon = Axe()
-            return NewWeapon
+            let newWeapon = Axe()
+            return newWeapon
         case "s":
-            let NewWeapon = Sword()
-            return NewWeapon
+            let newWeapon = Sword()
+            return newWeapon
         case "d":
-            let NewWeapon = Dagger()
-            return NewWeapon
+            let newWeapon = Dagger()
+            return newWeapon
         case "l":
-            let NewWeapon = LegendarySword()
-            return NewWeapon
+            let newWeapon = LegendarySword()
+            return newWeapon
         default:
             break
             
@@ -149,68 +173,85 @@ class Game {
     }
     
     //MARK: - Check Name Character
-    //This function is used to check that the names of the characters of the team are different
-    private func checkNameCharacter(UserTeam : [Character], name : String) -> Bool {
+    ///This function is used to check that the names of the characters of the team are different
+    private func checkNameCharacter(userTeam : [Character], name : String) -> Bool {
         var i = 0
-        while i < UserTeam.count {
-            if UserTeam[i].name.lowercased() == name.lowercased() {
+        while i < userTeam.count {
+            if userTeam[i].name.lowercased() == name.lowercased() {
                 return false
             }
             i = i + 1
         }
         return true
     }
+    
+    //MARK: - Play Game
+    ///This function launches the game and display the winner
     private func playGame()  {
-        while Users[0].isDead() == false && Users[1].isDead() == false {
+        while users[0].isDead() == false && users[1].isDead() == false {
             //Players take turns playing until they die
-            if Users[0].isDead() == false && Users[1].isDead() == false {
+            if users[0].isDead() == false && users[1].isDead() == false {
                 roundGame()
             }
-            if Users[0].isDead() == false && Users[1].isDead() == false  {
+            if users[0].isDead() == false && users[1].isDead() == false  {
                 roundGame()
             }
             
         }
         
         //Display stat winner
-        if Users[0].isDead() == false  {
-            print("The winner is \(Users[0].nameUserTeam) \n This stat is ")
-            Users[0].printTeamUser()
-            print(Users[0].userScore)
+        if users[0].isDead() == false  {
+            displayWinner(user: users[0])
+            displayLooser(user: users[1])
             
-        }else if Users[1].isDead() == false {
-            print("The winner is \(Users[1].nameUserTeam) \n This stat is ")
-            Users[1].printTeamUser()
-            print("Number of round")
-            print(Users[1].userScore)
+        }else if users[1].isDead() == false {
+            displayWinner(user: users[1])
+            displayLooser(user: users[0])
         }
+        
         var choice :String
         print("Do you want toreplay ? (y/n)")
         choice = readLine()!
         while choice.lowercased() != "y" && choice.lowercased() != "n" {
-            print("Error !Do you want toreplay ? (y/n)")
+            print("Error ! Do you want toreplay ? (y/n)")
             choice = readLine()!
         }
         if choice.lowercased() == "y" {
-            NewGame.PrepareToPlay()
-            NewGame.playGame()
+            newGame.prepareToPlay()
         }else{
             print("Good bye player !")
         }
     }
     
+    private func displayWinner(user : User){
+        print("The winner is \(user.nameUserTeam) \n This stat is ")
+        print("Character alive : ")
+        user.printTeamUser()
+        print("Character dead :")
+        user.printTeamCharacterDead()
+        print("Number of round")
+        print(user.userScore)
+    }
+    private func displayLooser(user : User){
+        print("The looser is \(user.nameUserTeam) \n This stat is ")
+        print("Character dead :")
+        user.printTeamCharacterDead()
+        print("Number of round")
+        print(user.userScore)
+    }
+    
     //MARK: - Round Game
-    // Start round game
+    /// Start round game allows select to heal or fight
     private func roundGame() {
         
-        let statTeamUser = Users[0].teamUser.count
-        if Users[0].userScore >= 1 {
+        let statTeamUser = users[0].teamUser.count
+        if users[0].userScore >= 1 {
             
             
             var choice : String
             
-            print("What do you want to do? \(Users[0].nameUserTeam)")
-            print("Do you want to heal or fight? \(Users[0].nameUserTeam)")
+            print("What do you want to do? \(users[0].nameUserTeam)")
+            print("Do you want to heal or fight? \(users[0].nameUserTeam)")
             print("Select (T) to treat a member of your team or (F) to fight ")
             choice = readLine()!
             
@@ -223,45 +264,48 @@ class Game {
                 
                 if choice.lowercased() == "t" {
                     print("Select a player  ")
-                    let characterSelected = selectCharcter(User: Users[0], statTeamUser: statTeamUser)
-                    let characterGainLife = usePotion(Character:  Users[0].teamUser[characterSelected])
-                    Users[0].teamUser[characterSelected] = characterGainLife
-                    Users.swapAt(0, 1)
+                    let characterSelected = selectCharcter(User: users[0], statTeamUser: statTeamUser)
+                    let characterGainLife = usePotion(character:  users[0].teamUser[characterSelected])
+                    users[0].teamUser[characterSelected] = characterGainLife
+                    users.swapAt(0, 1)
                 }else if choice.lowercased() == "f"{
-                    batlleGame(Player1: Users[0], Player2: Users[1])
-                    Users.swapAt(0, 1)
+                    batleGame(Player1: users[0], Player2: users[1])
+                    users.swapAt(0, 1)
                     
                 }
             }
         }
         else{
-            batlleGame(Player1: Users[0], Player2: Users[1])
-            Users.swapAt(0, 1)
+            batleGame(Player1: users[0], Player2: users[1])
+            users.swapAt(0, 1)
             
         }
         
         
     }
     //MARK: - Battle Game
-    private func batlleGame(Player1 : User, Player2 : User) {
+    /// The logic of combat is happening here
+    private func batleGame(Player1 : User, Player2 : User) {
         var statTeamEnemies = Player2.teamUser.count
         let statTeamUser = Player1.teamUser.count
         let random = Int.random(in: 0 ... (Player1.userScore + 1))
-        var secretArm = false
+        var secretChest = false
         print("Who will fight ? \(Player1.nameUserTeam)")
         
         
         // The player enters the index of the persoonage which will attack
         let selctedCharacterUser =  selectCharcter(User: Player1, statTeamUser: statTeamUser)
         
-        // The joeur returns the index of the enemy which will receive the attack
+        // The player returns the index of the enemy which will receive the attack
+        print("Who do you want to attack ?")
         let selctedEnemy = selectCharcter(User : Player2,statTeamUser: statTeamEnemies)
-        
+        //To unlock the secret chest
         if random == Player1.userScore {
-            secretArm = true
+            secretChest = true
         }
-        attack(Character1: Player1.teamUser[selctedCharacterUser],Character2: Player2.teamUser[selctedEnemy], secretArm: secretArm )
+        attack(Character1: Player1.teamUser[selctedCharacterUser],Character2: Player2.teamUser[selctedEnemy], secretChest: secretChest )
         if Player2.teamUser[selctedEnemy].life <= 0 {
+            Player2.teamCharacterDead.append(Player2.teamUser[selctedEnemy])
             Player2.teamUser.remove(at : selctedEnemy)
             statTeamEnemies = statTeamEnemies - 1
         }
@@ -272,29 +316,30 @@ class Game {
         
     }
     //MARK: - Attack
-    //The function that allows the character to attack
-    private func attack(Character1 : Character, Character2 : Character, secretArm : Bool){
+    ///The function that allows the character to attack
+    private func attack(Character1 : Character, Character2 : Character, secretChest : Bool){
         print("- \(Character1.name) attack \(Character2.name)")
-        if  secretArm == false{
+        if  secretChest == false{
             Character2.life = Character2.life - Character1.weapon.damage
         }else{
             Character2.life =  Character2.life / 2
-            print("\(Character1.name) unlocked the secret arm and attack")
+            print("\(Character1.name) unlocked the secret chest ")
+            print("\(Character1.name) open the chest, take out the weapon and attack")
             
         }
         
         if Character2.life > 0 {
-            print("He staying \(Character2.name)  \(Character2.life) points of life ")
+            print(" \(Character2.name) has left  \(Character2.life) points of life ")
         }
         else{
-            print("\(Character2.name) is die ")
+            print("\(Character2.name) is dead ")
         }
         
         
     }
     //MARK: - Use potion
-    //The function that allows the character to gain life
-    private func usePotion(Character : Character ) -> Character {
+    ///The function that allows the character to gain life
+    private func usePotion(character : Character ) -> Character {
         
         
         print("What potion do you want use ? ")
@@ -309,21 +354,21 @@ class Game {
             }
         }
         if selectedPotion.lowercased() == "p" {
-            let NewPotion = Potion(Characterlife: Character.life)
-            NewPotion.gainLife(Character:Character)
-            print("The life of \(Character.name) are \(Character.life) now ")
+            let newPotion = Potion(characterlife: character.life)
+            newPotion.gainLife(character:character)
+            print("The life of \(character.name) are \(character.life) now ")
         }
         if selectedPotion.lowercased() == "s" {
-            let NewPotion = SuperPotion()
-            NewPotion.gainLife(Character: Character)
-            print("The life of \(Character.name) are \(Character.life) now ")
+            let newPotion = SuperPotion()
+            newPotion.gainLife(character: character)
+            print("The life of \(character.name) are \(character.life) now ")
         }
         
         
-        return Character
+        return character
     }
     //MARK: - Selected Character
-    // The player returns the index of the persoonage which will attack
+    /// The player returns the index of the persoonage which will attack
     private func selectCharcter(User : User,statTeamUser : Int) -> Int {
         
         User.printTeamUser()
@@ -338,7 +383,7 @@ class Game {
         return selectedCharacterUser
         
     }
-    
+    ///This function allows to check selection
     private func checkUserSelection() -> Int {
         var selctedCharacter : String
         var selectedCharacterUser = 0

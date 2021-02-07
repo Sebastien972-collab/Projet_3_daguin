@@ -6,6 +6,6 @@
 //
 
 import Foundation
-let NewGame = Game()
-NewGame.PrepareToPlay()
+let newGame = Game()
+newGame.prepareToPlay()
 

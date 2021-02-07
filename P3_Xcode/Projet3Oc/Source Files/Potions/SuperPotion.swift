@@ -8,6 +8,6 @@
 import Foundation
 class SuperPotion: Potion {
     init() {
-        super.init(Characterlife: 10)
+        super.init(characterlife: 10)
     }
 }

@@ -11,6 +11,8 @@ class User {
     var teamUser : [Character]
     var userScore : Int
     var statVictory = false
+    var teamCharacterDead : [Character] = []
+    
     
     
     init(nameUserTeam : String, teamUser : [Character], userScore : Int) {
@@ -22,6 +24,11 @@ class User {
     func printTeamUser() {
         for (index ,_) in teamUser.enumerated() {
             print(" Equipe \(nameUserTeam) : Select \(index) for \(teamUser[index].name) (atk : \(teamUser[index].weapon.damage) life : \(teamUser[index].life))")
+        }
+    }
+    func printTeamCharacterDead() {
+        for (index ,_) in teamCharacterDead.enumerated() {
+            print(" Equipe \(nameUserTeam) : Select \(index) for \(teamCharacterDead[index].name) (atk : \(teamCharacterDead[index].weapon.damage)")
         }
     }
     func isDead() -> Bool {

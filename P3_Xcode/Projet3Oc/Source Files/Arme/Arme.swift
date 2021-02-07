@@ -14,14 +14,5 @@ class Weapon {
         self.name = name
         self.damage = damage
     }
-    
-    
-    func secretArmActivate(degat : Int) -> Int {
-        let degatSupp  = degat * 2
-        return degatSupp
-    }
-    func degatArm(degat : Int) -> Int {
-        return degat
-    }
 }
 

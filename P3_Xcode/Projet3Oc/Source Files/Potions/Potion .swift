@@ -9,10 +9,10 @@ import Foundation
 class Potion {
     var lilePointGain : Int
     
-    init(Characterlife : Int) {
-        lilePointGain = (Characterlife / 2)
+    init(characterlife : Int) {
+        lilePointGain = (characterlife / 2)
     }
-    func gainLife(Character : Character) {
-        Character.life = Character.life + lilePointGain
+    func gainLife(character : Character) {
+        character.life = character.life + lilePointGain
     }
 }
